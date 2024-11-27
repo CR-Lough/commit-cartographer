@@ -1,37 +1,27 @@
 # Commit Cartographer
 
-## Overview
-
-The `commit-cartographer` project provides a tool to analyze the commit activity of a Git repository. It generates a flowchart diagram that visualizes the number of commits made in each folder of the repository, helping developers understand the structure and activity of their codebase.
+A Python tool that generates visual flowcharts of Git repository activity by analyzing commit patterns across directories.
 
 ## Features
 
-- Count commits for each folder in a Git repository.
-- Generate a Mermaid flowchart diagram to visualize commit activity.
-- Supports only files that currently exist in the repository.
-- Customizable color gradient for visual representation.
+- 🔍 **Intelligent Analysis**: Counts commits per directory while focusing only on currently existing files
+- 📊 **Visual Representation**: Generates Mermaid flowcharts with directory relationships
+- 🎨 **Color Gradients**: Uses a 10-step color gradient to represent commit density
+- 🌳 **Directory Depth**: Supports up to 4 levels of directory nesting
+- 📁 **Repository Structure**: Shows parent-child relationships between directories
+
 
 ## Installation
 
-To use this project, ensure you have Python 3.12 or higher installed. You can install the required dependencies using `pip`:
-
-"""
-pip install -r requirements.txt
-"""
-
-Alternatively, you can install the dependencies directly:
-
-"""
-pip install gitpython>=3.1.43
-"""
+To use this project, ensure you have [uv](https://github.com/astral-sh/uv) installed.
 
 ## Usage
 
 To run the tool, execute the following command in your terminal:
 
-"""
-python git-activity.py [path_to_your_repo]
-"""
+```bash
+uv run git-activity.py [path_to_your_repo]
+```
 
 If no path is provided, it defaults to the current directory.
 
@@ -43,14 +33,63 @@ The script generates a Markdown file named `git-activity.md`, which contains the
 
 After running the script, you will find a `git-activity.md` file with content similar to the following:
 
-"""
+```mermaid
 flowchart LR
     root_node[/root\]
     style root_node fill:#ffffff,stroke:#333,stroke-width:2px
-    root_node --> node_folder1[/folder1\]
-    style node_folder1 fill:#ff00ff,stroke:#333,stroke-width:2px
-    ...
-"""
+    root_node --> node_src[/src\]
+    style node_src fill:#ff00ff,stroke:#333,stroke-width:2px
+    root_node --> node_cla[/cla\]
+    style node_cla fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_aws[/aws\]
+    style node_src_aws fill:#55aaff,stroke:#333,stroke-width:2px
+    root_node --> node_icons[/icons\]
+    style node_icons fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_php[/php\]
+    style node_src_php fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_az[/az\]
+    style node_src_az fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src_az --> node_src_az_2.53.0[/2.53.0\]
+    style node_src_az_2.53.0 fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_heroku[/heroku\]
+    style node_src_heroku fill:#00ffff,stroke:#333,stroke-width:2px
+    root_node --> node_.vscode[/.vscode\]
+    style node_.vscode fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_infracost[/infracost\]
+    style node_src_infracost fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_fig[/fig\]
+    style node_src_fig fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_usermn[/usermn\]
+    style node_src_usermn fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src_usermn --> node_src_usermn_sdc[/sdc\]
+    style node_src_usermn_sdc fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_deno[/deno\]
+    style node_src_deno fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_dotnet[/dotnet\]
+    style node_src_dotnet fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_example[/example\]
+    style node_src_example fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_shopify[/shopify\]
+    style node_src_shopify fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_task[/task\]
+    style node_src_task fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_capgo[/capgo\]
+    style node_src_capgo fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_wordpress[/wordpress\]
+    style node_src_wordpress fill:#00ffff,stroke:#333,stroke-width:2px
+    root_node --> node_.devcontainer[/.devcontainer\]
+    style node_.devcontainer fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_magnolia[/magnolia\]
+    style node_src_magnolia fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_gcloud[/gcloud\]
+    style node_src_gcloud fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_python[/python\]
+    style node_src_python fill:#00ffff,stroke:#333,stroke-width:2px
+    node_src --> node_src_preset[/preset\]
+    style node_src_preset fill:#00ffff,stroke:#333,stroke-width:2px
+    root_node --> node_.husky[/.husky\]
+    style node_.husky fill:#00ffff,stroke:#333,stroke-width:2px
+```
 
 ## Contributing
 
