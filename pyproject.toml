@@ -1,9 +1,11 @@
 [project]
-name = "git-activity"
+name = "commit-cartographer"
 version = "0.1.0"
-description = "Add your description here"
+description = "A tool to visualize the commit history of a Git repository."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "click>=8.1.7",
     "gitpython>=3.1.43",
+    "pytest>=8.3.3",
 ]

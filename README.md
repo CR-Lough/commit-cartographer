@@ -20,18 +20,18 @@ To use this project, ensure you have [uv](https://github.com/astral-sh/uv) insta
 To run the tool, execute the following command in your terminal:
 
 ```bash
-uv run git-activity.py [path_to_your_repo]
+uv run commit-cartographer/cli.py [path_to_your_repo]
 ```
 
 If no path is provided, it defaults to the current directory.
 
 ## Output
 
-The script generates a Markdown file named `git-activity.md`, which contains the Mermaid flowchart diagram representing the commit activity in the specified Git repository.
+The script generates a Markdown file named `git_activity.md`, which contains the Mermaid flowchart diagram representing the commit activity in the specified Git repository.
 
 ## Example
 
-After running the script, you will find a `git-activity.md` file with content similar to the following:
+After running the script, you will find a `git_activity.md` file with content similar to the following:
 
 ```mermaid
 flowchart LR
@@ -89,6 +89,39 @@ flowchart LR
     style node_src_preset fill:#00ffff,stroke:#333,stroke-width:2px
     root_node --> node_.husky[/.husky\]
     style node_.husky fill:#00ffff,stroke:#333,stroke-width:2px
+```
+You can also add the `--style` option to generate a tree diagram:
+
+```bash
+uv run commit-cartographer/cli.py [path_to_your_repo] --style tree
+```
+```
+root/
+└── orchestration/ (26 commits)
+    └── assets/ (20 commits)
+        └── dbt/ (4 commits)
+        └── ebirdapi/ (14 commits)
+            └── .dlt/ (2 commits)
+            └── schemas/ (4 commits)
+                └── export/ (2 commits)
+                └── import/ (2 commits)
+    └── utils/ (2 commits)
+└── orchestration_tests/ (4 commits)
+└── schemas/ (10 commits)
+    └── export/ (5 commits)
+    └── import/ (5 commits)
+└── scripts/ (3 commits)
+└── transformation/ (57 commits)
+    └── analyses/ (1 commits)
+    └── macros/ (1 commits)
+    └── models/ (43 commits)
+        └── sources/ (6 commits)
+            └── ebirdapi/ (6 commits)
+        └── staging/ (37 commits)
+            └── docs/ (21 commits)
+    └── seeds/ (1 commits)
+    └── snapshots/ (1 commits)
+    └── tests/ (1 commits)
 ```
 
 ## Contributing

@@ -10,7 +10,7 @@ wheels/
 .venv
 
 # Mermaid diagram
-git-activity.md
+git_activity.md
 
 # Git diffs
 diff.txt
