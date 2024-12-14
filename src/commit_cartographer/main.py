@@ -1,7 +1,7 @@
 import click
 import sys
-import git_activity as git
-from visualizers import VISUALIZERS
+from commit_cartographer import git_activity
+from commit_cartographer.visualizers import VISUALIZERS
 
 @click.command()
 @click.option(
@@ -31,7 +31,7 @@ from visualizers import VISUALIZERS
 def main(path, output, max_depth, style):
     """Generate a diagram showing Git repository folder activity."""
     try:
-        counts = git.get_folder_commit_counts(path)
+        counts = git_activity.get_folder_commit_counts(path)
         
         with open(output, 'w') as f:
             f.write("# Git Repository Activity Diagram\n\n")
