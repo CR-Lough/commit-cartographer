@@ -4,7 +4,7 @@ A Python tool that generates visual flowcharts of Git repository activity by ana
 
 ## Features
 
-- 🔍 **Intelligent Analysis**: Counts commits per directory while focusing only on currently existing files
+- 🔍 **Intelligent Analysis**: Counts commits per directory while focusing only on currently existing structure
 - 📊 **Visual Representation**: Generates Mermaid flowcharts with directory relationships
 - 🎨 **Color Gradients**: Uses a 10-step color gradient to represent commit density
 - 🌳 **Directory Depth**: Supports up to 4 levels of directory nesting
