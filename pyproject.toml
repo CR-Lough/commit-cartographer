@@ -1,6 +1,6 @@
 [project]
 name = "commit-cartographer"
-version = "0.1.6"
+version = "0.1.7"
 description = "A tool to visualize the commit history of a Git repository."
 readme = "README.md"
 requires-python = ">=3.10"
