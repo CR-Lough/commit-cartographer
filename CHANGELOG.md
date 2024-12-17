@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### 🐛 Bug Fixes
+
+- Need to add env vars
+
+## [0.1.7] - 2024-12-17
+
 ### Bug
 
 - Fix ModuleNotFoundError in install
