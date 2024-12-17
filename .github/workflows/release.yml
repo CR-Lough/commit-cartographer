@@ -66,4 +66,7 @@ jobs:
         run: uv build
         
       - name: Publish to PyPI
+        env:
+          UV_PUBLISH_USERNAME: ${{ secrets.UV_PUBLISH_USERNAME }}
+          UV_PUBLISH_PASSWORD: ${{ secrets.UV_PUBLISH_PASSWORD }}
         run: uv publish
