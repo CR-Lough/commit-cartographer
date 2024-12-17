@@ -12,6 +12,9 @@ jobs:
       released: ${{ steps.release.outputs.released }}
       tag: ${{ steps.release.outputs.tag }}
     
+    permissions:
+      contents: write
+
     steps:
       - uses: actions/checkout@v3
         with:
