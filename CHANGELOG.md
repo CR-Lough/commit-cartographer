@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### ⚙️ Miscellaneous Tasks
+
+- Remove pytest momentarily
+
+## [0.1.8] - 2024-12-17
+
 ### 🐛 Bug Fixes
 
 - Need to add env vars
