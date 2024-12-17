@@ -16,6 +16,13 @@ All notable changes to this project will be documented in this file.
 - Update README
 - New README diagram
 - Add LICENSE
+- Add release process
+
+### 🐛 Bug Fixes
+
+- Forgot to update version
+- Auto commit
+- Permissions to write back to the repo
 
 ### 📚 Documentation
 
