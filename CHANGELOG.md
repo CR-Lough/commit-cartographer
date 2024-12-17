@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### 🐛 Bug Fixes
 
 - Need to add env vars
+- Cosmetic
 
 ## [0.1.7] - 2024-12-17
 
