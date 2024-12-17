@@ -35,14 +35,17 @@ def get_folder_commit_counts(repo_path):
 
     folder_counts = defaultdict(int)
     
-    # Get all commits, but only count those for existing files
+    # Get all commits
     for commit in repo.iter_commits():
         for file in commit.stats.files.keys():
             # Only count commits for files that currently exist
             if file in current_files:
+                # Count the file itself
+                folder_counts[file] += 1
+                
                 # Split the path and increment count for each parent folder
                 parts = file.split('/')
-                for i in range(len(parts) - 1):  # Exclude the file itself
+                for i in range(len(parts) - 1):
                     folder = '/'.join(parts[:i+1])
                     if folder:  # Skip empty strings
                         folder_counts[folder] += 1

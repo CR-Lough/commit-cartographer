@@ -28,7 +28,12 @@ from commit_cartographer.visualizers import VISUALIZERS
     default='mermaid',
     help='Output style (default: mermaid)'
 )
-def main(path, output, max_depth, style):
+@click.option(
+    '--verbose',
+    is_flag=True,
+    help='Include files in the diagram'
+)
+def main(path, output, max_depth, style, verbose):
     """Generate a diagram showing Git repository folder activity."""
     try:
         counts = git_activity.get_folder_commit_counts(path)
@@ -36,7 +41,8 @@ def main(path, output, max_depth, style):
         with open(output, 'w') as f:
             f.write("# Git Repository Activity Diagram\n\n")
             
-            diagram = VISUALIZERS[style](counts)
+            # Generate diagram with appropriate style and verbose flag
+            diagram = VISUALIZERS[style](counts, verbose)
             
             if style == 'mermaid':
                 f.write("```mermaid\n")

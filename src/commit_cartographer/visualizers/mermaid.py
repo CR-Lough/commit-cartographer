@@ -17,23 +17,24 @@ def generate_gradient_colors(num_steps):
         colors.append(f'#{r:02x}{g:02x}{b:02x}')
     return colors
 
-def generate_diagram(folder_counts):
+def generate_diagram(path_counts, verbose=False):
     """
-    Generate a Mermaid flowchart diagram from folder commit counts.
+    Generate a Mermaid flowchart diagram from folder and file commit counts.
     Maximum depth of 4 levels from root, using a 10-step color gradient.
     
     Args:
-        folder_counts (dict): Dictionary mapping folder paths to commit counts
+        path_counts (dict): Dictionary mapping paths (folders/files) to commit counts
+        verbose (bool): If True, include files in the diagram. If False, only show folders
         
     Returns:
         str: Mermaid flowchart diagram as a string
     """
-    if not folder_counts:
+    if not path_counts:
         return "flowchart LR\n    root_node[/root\\]"
         
-    total_commits = sum(folder_counts.values())
-    min_count = min(folder_counts.values())
-    max_count = max(folder_counts.values())
+    total_commits = sum(path_counts.values())
+    min_count = min(path_counts.values())
+    max_count = max(path_counts.values())
     
     # Generate 10-step gradient colors
     gradient_colors = generate_gradient_colors(10)
@@ -44,10 +45,14 @@ def generate_diagram(folder_counts):
     mermaid.append("    root_node[/root\\]")
     mermaid.append("    style root_node fill:#ffffff,stroke:#333,stroke-width:2px")
     
-    # Process folder paths up to 4 levels deep
-    for folder, count in folder_counts.items():
-        # Skip folders deeper than 4 levels
-        if folder.count('/') > 3:
+    # Process paths up to 4 levels deep
+    for path, count in path_counts.items():
+        # Skip paths deeper than 4 levels
+        if path.count('/') > 3:
+            continue
+            
+        # Skip files if not in verbose mode
+        if not verbose and '.' in path.split('/')[-1]:
             continue
         
         # Map commit count to gradient color
@@ -58,19 +63,26 @@ def generate_diagram(folder_counts):
         else:
             color = '#ffffff'
         
-        parts = folder.split('/')
-        node_name = f"node_{folder.replace('/', '_')}"
+        parts = path.split('/')
+        node_name = f"node_{path.replace('/', '_').replace('.', '_')}"
         
-        # Handle top-level folders and subfolders
-        if '/' not in folder:  # Top-level folder
+        # Handle top-level paths and subpaths
+        if '/' not in path:  # Top-level path
             parent_name = "root_node"
-            folder_label = folder
-        else:  # Subfolder
+            path_label = path
+        else:  # Subpath
             parent_name = f"node_{'/'.join(parts[:-1]).replace('/', '_')}"
-            folder_label = parts[-1]
+            path_label = parts[-1]
         
-        # Use folder shape for nodes
-        mermaid.append(f"    {parent_name} --> {node_name}[/{folder_label}\\]")
+        # Use different shapes for files and folders
+        is_file = '.' in parts[-1]
+        if is_file:
+            # Use rectangle shape for files
+            mermaid.append(f"    {parent_name} --> {node_name}[{path_label}]")
+        else:
+            # Use folder shape (trapezoid) for directories
+            mermaid.append(f"    {parent_name} --> {node_name}[/{path_label}\\]")
+        
         mermaid.append(f"    style {node_name} fill:{color},stroke:#333,stroke-width:2px")
     
     return "\n".join(mermaid)
